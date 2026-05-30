@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roxana Corona — Data Scientist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;400&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #2C1F14;
+    --paper: #F2EBD9;
+    --cream: #E8DEC8;
+    --accent: #6B7A3A;
+    --accent2: #C4622D;
+    --muted: #7A6B55;
+    --border: #C9B99A;
+    --card: #FAF6EE;
+    --tag-bg: #DDD4BF;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 4rem;
+    background: rgba(245,242,236,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Josefin Sans', monospace;
+    font-weight: 200;
+    font-size: 0.9rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+  }
+  .hero-left {
+    padding: 6rem 4rem 4rem;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative;
+  }
+  .hero-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.1s forwards;
+  }
+  .hero-name {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: clamp(2.8rem, 4.8vw, 4.8rem);
+    line-height: 1.0;
+    color: var(--ink);
+    font-weight: 100;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.2s forwards;
+  }
+  .hero-name em {
+    font-style: normal;
+    color: var(--accent);
+    font-weight: 200;
+    letter-spacing: 0.14em;
+  }
+  .hero-tagline {
+    margin-top: 1.8rem;
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--muted);
+    max-width: 420px;
+    line-height: 1.7;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.35s forwards;
+  }
+  .hero-tagline strong { color: var(--ink); font-weight: 500; }
+  .hero-ctas {
+    display: flex; gap: 1rem; margin-top: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.5s forwards;
+  }
+  .btn-primary {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0.75rem 1.8rem;
+    border-radius: 2px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: #556030; transform: translateY(-1px); }
+  .btn-ghost {
+    border: 1px solid var(--border);
+    color: var(--ink);
+    padding: 0.75rem 1.8rem;
+    border-radius: 2px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: border-color 0.2s, transform 0.15s;
+  }
+  .btn-ghost:hover { border-color: var(--ink); transform: translateY(-1px); }
+
+  .hero-right {
+    background: var(--cream);
+    border-left: 1px solid var(--border);
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 6rem 4rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-right::before {
+    content: '';
+    position: absolute; top: -80px; right: -80px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(107,122,58,0.10) 0%, transparent 70%);
+  }
+  .stack-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1.2rem;
+  }
+  .stack-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+    margin-bottom: 2.5rem;
+  }
+  .stack-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.6rem 0.9rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--ink);
+  }
+  .hero-divider { border: none; border-top: 1px solid var(--border); margin: 0 0 2rem; }
+  .location-tag {
+    font-size: 0.8rem;
+    color: var(--muted);
+    display: flex; align-items: center; gap: 0.4rem;
+  }
+  .open-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #7A9A3A;
+    display: inline-block;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  /* SECTION BASE */
+  section { padding: 6rem 4rem; }
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    line-height: 1.1;
+    margin-bottom: 3rem;
+  }
+
+  /* ABOUT */
+  #about { background: var(--ink); color: var(--paper); }
+  #about .section-label { color: var(--accent); }
+  #about .section-title { color: var(--paper); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .about-text p {
+    font-size: 1.05rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: rgba(245,242,236,0.8);
+    margin-bottom: 1.2rem;
+  }
+  .about-text p strong { color: var(--paper); font-weight: 500; }
+  .about-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    border-left: 1px solid rgba(245,242,236,0.15);
+    padding-left: 3rem;
+  }
+  .stat-num {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 2.8rem;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .stat-label { font-size: 0.8rem; color: rgba(245,242,236,0.5); margin-top: 0.2rem; }
+
+  /* PROJECTS */
+  #projects { background: var(--paper); }
+  .projects-list { display: flex; flex-direction: column; gap: 2px; }
+
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+  .project-card:hover { box-shadow: 0 4px 24px rgba(0,0,0,0.07); }
+
+  .project-header {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    align-items: center;
+    padding: 2rem 2.4rem;
+    cursor: pointer;
+    gap: 2rem;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .project-card.open .project-header { border-color: var(--border); }
+
+  .project-number {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.08em;
+  }
+  .project-name {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 1.5rem;
+    color: var(--ink);
+    margin-bottom: 0.4rem;
+  }
+  .project-subtitle { font-size: 0.85rem; color: var(--muted); }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: flex-end; }
+  .tag {
+    background: var(--tag-bg);
+    border-radius: 2px;
+    padding: 0.25rem 0.6rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+  .tag.accent { background: rgba(107,122,58,0.12); color: var(--accent); }
+
+  .project-body {
+    display: none;
+    padding: 2.4rem;
+    background: #F5EFE3;
+  }
+  .project-card.open .project-body { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+
+  .project-section-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+  }
+  .project-desc { font-size: 0.92rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.6rem; }
+
+  .result-box {
+    background: var(--ink);
+    border-radius: 4px;
+    padding: 1.4rem 1.6rem;
+    margin-bottom: 1.6rem;
+  }
+  .result-metric {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 2rem;
+    color: var(--accent);
+  }
+  .result-label { font-size: 0.78rem; color: rgba(245,242,236,0.6); margin-top: 0.2rem; }
+
+  .step-list { list-style: none; }
+  .step-list li {
+    display: flex; gap: 0.8rem; align-items: flex-start;
+    font-size: 0.88rem; color: var(--muted);
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border);
+    line-height: 1.5;
+  }
+  .step-list li:last-child { border-bottom: none; }
+  .step-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    flex-shrink: 0;
+    padding-top: 0.15rem;
+  }
+
+  .project-link {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.82rem; font-weight: 500;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.1rem;
+    transition: border-color 0.2s, color 0.2s;
+    margin-top: 0.5rem;
+  }
+  .project-link:hover { color: var(--accent); border-color: var(--accent); }
+
+  .toggle-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    display: flex; align-items: center; gap: 0.4rem;
+  }
+  .toggle-icon { font-size: 1.1rem; transition: transform 0.2s; }
+  .project-card.open .toggle-icon { transform: rotate(45deg); }
+
+  /* SKILLS */
+  #skills { background: var(--cream); }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .skill-group {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.6rem;
+  }
+  .skill-group-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+  .skill-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .skill-pill {
+    background: var(--tag-bg);
+    border-radius: 2px;
+    padding: 0.3rem 0.7rem;
+    font-size: 0.78rem;
+    color: var(--ink);
+  }
+
+  /* EXPERIENCE */
+  #experience { background: var(--paper); }
+  .exp-list { display: flex; flex-direction: column; }
+  .exp-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 3rem;
+    padding: 2.4rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .exp-item:last-child { border-bottom: none; }
+  .exp-meta { padding-top: 0.2rem; }
+  .exp-dates {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.06em;
+  }
+  .exp-company {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .exp-role {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+    color: var(--ink);
+  }
+  .exp-bullets { list-style: none; }
+  .exp-bullets li {
+    font-size: 0.88rem; color: var(--muted); line-height: 1.6;
+    padding: 0.25rem 0 0.25rem 1.1rem;
+    position: relative;
+  }
+  .exp-bullets li::before {
+    content: '—'; position: absolute; left: 0;
+    color: var(--accent); font-size: 0.7rem; top: 0.35rem;
+  }
+
+
+  /* EXPERIENCE TIMELINE */
+  .timeline {
+    position: relative;
+    padding-left: 2.5rem;
+    margin-top: 1rem;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 8px; bottom: 8px;
+    width: 1px;
+    background: var(--border);
+  }
+  .tl-item {
+    position: relative;
+    margin-bottom: 0.4rem;
+  }
+  .tl-dot {
+    position: absolute;
+    left: -2.5rem;
+    top: 1.1rem;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 2px solid var(--border);
+    transition: border-color 0.2s, background 0.2s;
+    transform: translateX(-4px);
+  }
+  .tl-item.open .tl-dot { background: var(--accent); border-color: var(--accent); }
+  .tl-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.1rem 1.4rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    cursor: pointer; gap: 1rem;
+    transition: border-color 0.2s;
+  }
+  .tl-item.open .tl-header {
+    border-color: var(--accent);
+    border-bottom-left-radius: 0; border-bottom-right-radius: 0;
+    border-bottom-color: transparent;
+  }
+  .tl-header-left { flex: 1; }
+  .tl-dates {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.1em;
+    color: var(--muted); margin-bottom: 0.25rem;
+  }
+  .tl-role {
+    font-family: 'Josefin Sans', sans-serif; font-weight: 700;
+    font-size: 1rem; letter-spacing: -0.02em; color: var(--ink);
+  }
+  .tl-company { font-size: 0.8rem; color: var(--muted); margin-top: 0.15rem; }
+  .tl-toggle {
+    font-family: 'DM Mono', monospace; font-size: 0.85rem;
+    color: var(--muted); flex-shrink: 0; transition: transform 0.2s, color 0.2s;
+    line-height: 1;
+  }
+  .tl-item.open .tl-toggle { transform: rotate(45deg); color: var(--accent); }
+  .tl-body {
+    display: none;
+    background: #F5EFE3;
+    border: 1px solid var(--accent);
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    padding: 1.2rem 1.4rem 1.4rem;
+  }
+  .tl-item.open .tl-body { display: block; }
+  .tl-bullets { list-style: none; }
+  .tl-bullets li {
+    font-size: 0.875rem; color: var(--muted); line-height: 1.6;
+    padding: 0.3rem 0 0.3rem 1.1rem; position: relative;
+    border-bottom: 1px solid var(--border);
+  }
+  .tl-bullets li:last-child { border-bottom: none; }
+  .tl-bullets li::before {
+    content: '—'; position: absolute; left: 0;
+    color: var(--accent); font-size: 0.7rem; top: 0.4rem;
+  }
+
+  /* CONTACT */
+  #contact { background: var(--ink); color: var(--paper); text-align: center; padding: 6rem 4rem; }
+  #contact .section-label { color: var(--accent); }
+  #contact .section-title { color: var(--paper); margin-bottom: 1rem; }
+  .contact-sub { font-size: 1rem; color: rgba(245,242,236,0.55); margin-bottom: 3rem; font-weight: 300; }
+  .contact-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+  .contact-link {
+    display: flex; align-items: center; gap: 0.5rem;
+    padding: 0.8rem 1.6rem;
+    border: 1px solid rgba(245,242,236,0.2);
+    border-radius: 2px;
+    color: var(--paper);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .contact-link:hover { border-color: var(--accent); background: rgba(107,122,58,0.12); }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    border-top: 1px solid rgba(245,242,236,0.08);
+    padding: 1.5rem 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  footer span { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: rgba(245,242,236,0.3); }
+
+
+  /* Josefin display tuning */
+  .section-title {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 200;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .project-name {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 200;
+    letter-spacing: 0.06em;
+  }
+  .tl-role {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.04em;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s, transform 0.5s; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 6rem 1.5rem 3rem; }
+    section { padding: 4rem 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; }
+    .about-stats { border-left: none; padding-left: 0; border-top: 1px solid rgba(245,242,236,0.15); padding-top: 2rem; flex-direction: row; flex-wrap: wrap; gap: 2rem; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .project-card.open .project-body { grid-template-columns: 1fr; }
+    .timeline { padding-left: 1.5rem; }
+    .project-header { grid-template-columns: 1fr; }
+    .project-tags { justify-content: flex-start; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">RCX · DATA</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <p class="hero-label">Data Scientist · Health Analytics · Process Intelligence</p>
+    <h1 class="hero-name">Roxana<br><em>Corona</em></h1>
+    <p class="hero-tagline">
+      From <strong>P&G production lines</strong> to predictive models —
+      I turn complex, messy data into decisions that actually move the needle.
+      Specialized in <strong>health analytics, clinical evidence, and behavioral analysis</strong>.
+    </p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="mailto:coronav.roxana@gmail.com" class="btn-ghost">Get in touch</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <p class="stack-title">Core Stack</p>
+    <div class="stack-grid">
+      <div class="stack-item">Python</div>
+      <div class="stack-item">SQL</div>
+      <div class="stack-item">Scikit-learn</div>
+      <div class="stack-item">XGBoost</div>
+      <div class="stack-item">CatBoost</div>
+      <div class="stack-item">Power BI</div>
+      <div class="stack-item">Pandas / NumPy</div>
+      <div class="stack-item">TensorFlow</div>
+    </div>
+    <hr class="hero-divider">
+    <p class="location-tag">
+      <span class="open-dot"></span>
+      Querétaro, México · Also open to remote & CDMX
+    </p>
+    <p class="location-tag" style="margin-top:0.5rem;">
+      &nbsp;&nbsp;&nbsp;&nbsp; MIT Applied Data Science · TripleTen DS Bootcamp 2026
+    </p>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="reveal">
+    <p class="section-label">Background</p>
+    <h2 class="section-title">Not a typical data scientist.</h2>
+  </div>
+  <div class="about-grid reveal">
+    <div class="about-text">
+      <p>I started as a <strong>Biotechnology Engineer at ITESM</strong>, moved into process engineering at <strong>Procter & Gamble</strong> where I ran SPC on cosmetic manufacturing lines in a GMP environment, then led innovation and automation at a multinational consulting firm.</p>
+      <p>Along the way I picked up an <strong>MIT Applied Data Science certificate</strong>, a finance diploma from ITESM, and a business program at <strong>IESEG in Lille, France</strong>. Now I'm completing a Data Science Bootcamp at TripleTen.</p>
+      <p>What that stack gives me: I understand <strong>what data means in the real world</strong> — not just in notebooks. When I build a churn model, I already know what the retention team will do with it. When I optimize a process, I know what a 2% sMAPE improvement costs to implement.</p>
+    </div>
+    <div class="about-stats">
+      <div>
+        <div class="stat-num">7+</div>
+        <div class="stat-label">years in industrial & analytical roles</div>
+      </div>
+      <div>
+        <div class="stat-num">90%</div>
+        <div class="stat-label">scrap reduction at P&G via SPC</div>
+      </div>
+      <div>
+        <div class="stat-num">80+</div>
+        <div class="stat-label">automated processes at SICCSA</div>
+      </div>
+      <div>
+        <div class="stat-num">633</div>
+        <div class="stat-label">TOEFL ITP · Advanced English</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="reveal">
+    <p class="section-label">Work</p>
+    <h2 class="section-title">Selected Projects</h2>
+  </div>
+
+  <div class="projects-list">
+
+    <!-- PROJECT 1: Zyfra -->
+    <div class="project-card reveal" onclick="toggleProject(this)">
+      <div class="project-header">
+        <div>
+          <p class="project-number">01 · Industrial ML</p>
+          <h3 class="project-name">Gold Recovery Optimization</h3>
+          <p class="project-subtitle">Zyfra · Heavy industry process prediction</p>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:flex-end; gap:1rem;">
+          <div class="project-tags">
+            <span class="tag">RandomForest</span>
+            <span class="tag">Regression</span>
+            <span class="tag">sMAPE</span>
+            <span class="tag">SPC</span>
+            <span class="tag accent">Pharma-adjacent</span>
+          </div>
+          <div class="toggle-btn"><span class="toggle-icon">+</span> <span>details</span></div>
+        </div>
+      </div>
+      <div class="project-body">
+        <div>
+          <p class="project-section-title">Problem & Why it matters</p>
+          <p class="project-desc">Zyfra develops efficiency solutions for heavy industry. The goal: predict gold recovery yield across flotation and purification stages to eliminate non-profitable process parameters — directly analogous to pharma batch release validation and QA process control.</p>
+          <div class="result-box">
+            <div class="result-metric">sMAPE 21.8%</div>
+            <div class="result-label">Final model · custom metric validated against recovery formula (MAE ≈ 0)</div>
+          </div>
+          <p class="project-section-title">Key Takeaways</p>
+          <p class="project-desc">Chrono-aligned imputation matters more than model complexity when data has temporal structure. Random Forest outperformed Linear Regression and Decision Tree under cross-validation with the custom sMAPE scorer.</p>
+          <a href="https://github.com/coronavroxana" class="project-link" target="_blank">→ View on GitHub</a>
+        </div>
+        <div>
+          <p class="project-section-title">Methodology</p>
+          <ul class="step-list">
+            <li><span class="step-num">01</span> Loaded and merged 3 datasets (train, test, full); verified gold recovery formula with MAE ≈ 0</li>
+            <li><span class="step-num">02</span> Outlier treatment via quantile filtering (1%–99%); forward-fill imputation aligned to process chronology</li>
+            <li><span class="step-num">03</span> EDA across extraction stages — compared Au/Ag/Pb distribution, detected zero-anomalies</li>
+            <li><span class="step-num">04</span> Feature engineering: homologated train/test feature sets, StandardScaler applied post-split</li>
+            <li><span class="step-num">05</span> Trained Linear Regression, Decision Tree, Random Forest; evaluated with custom sMAPE</li>
+            <li><span class="step-num">06</span> Final model selection via cross-validation; identified non-profitable parameters for operational review</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 2: Telecom Churn -->
+    <div class="project-card reveal" onclick="toggleProject(this)">
+      <div class="project-header">
+        <div>
+          <p class="project-number">02 · Capstone · End-to-end ML</p>
+          <h3 class="project-name">Customer Churn Prediction</h3>
+          <p class="project-subtitle">Interconnect Telecom · Full pipeline from raw data to business strategy</p>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:flex-end; gap:1rem;">
+          <div class="project-tags">
+            <span class="tag">XGBoost</span>
+            <span class="tag">CatBoost</span>
+            <span class="tag">AUC-ROC</span>
+            <span class="tag">Class imbalance</span>
+            <span class="tag accent">Clinical transferable</span>
+          </div>
+          <div class="toggle-btn"><span class="toggle-icon">+</span> <span>details</span></div>
+        </div>
+      </div>
+      <div class="project-body">
+        <div>
+          <p class="project-section-title">Problem & Why it matters</p>
+          <p class="project-desc">Predict which telecom subscribers will churn so the marketing team can intervene proactively with retention offers. The same ML architecture transfers directly to <strong>patient dropout, clinical trial adherence, and subscriber retention</strong> in health platforms.</p>
+          <div class="result-box">
+            <div class="result-metric">AUC-ROC 78.38%</div>
+            <div class="result-label">XGBoost · holdout test set · 5-model comparison</div>
+          </div>
+          <p class="project-section-title">Key Takeaways</p>
+          <p class="project-desc">Class imbalance doesn't always require resampling — class_weight='balanced' with proper cross-validation seeds preserved data integrity while improving minority-class recall. Feature source matters: contract type was the strongest churn predictor.</p>
+          <a href="https://github.com/coronavroxana" class="project-link" target="_blank">→ View on GitHub</a>
+        </div>
+        <div>
+          <p class="project-section-title">Methodology</p>
+          <ul class="step-list">
+            <li><span class="step-num">01</span> Integrated 4 relational tables (contract, personal, internet, phone); unified into single analytical dataset</li>
+            <li><span class="step-num">02</span> EDA: distribution analysis, churn rate by contract type, tenure, and service bundle</li>
+            <li><span class="step-num">03</span> Feature engineering: encoded categorical variables, engineered tenure and service-interaction features</li>
+            <li><span class="step-num">04</span> Class imbalance handled via class_weight='balanced' and scale_pos_weight — no artificial resampling</li>
+            <li><span class="step-num">05</span> Trained 5 models: Logistic Regression, Decision Tree, Random Forest, CatBoost, XGBoost</li>
+            <li><span class="step-num">06</span> Final selection: XGBoost (AUC-ROC 78.38%) with cross-validation; translated risk scores into retention framework</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 3: Instacart -->
+    <div class="project-card reveal" onclick="toggleProject(this)">
+      <div class="project-header">
+        <div>
+          <p class="project-number">03 · Behavioral Analytics · EDA</p>
+          <h3 class="project-name">Market Basket & Customer Behavior</h3>
+          <p class="project-subtitle">Instacart · 3M+ grocery orders · Consumer insights</p>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:flex-end; gap:1rem;">
+          <div class="project-tags">
+            <span class="tag">EDA</span>
+            <span class="tag">Pandas</span>
+            <span class="tag">Seaborn</span>
+            <span class="tag">Behavioral patterns</span>
+            <span class="tag accent">Consumer insights</span>
+          </div>
+          <div class="toggle-btn"><span class="toggle-icon">+</span> <span>details</span></div>
+        </div>
+      </div>
+      <div class="project-body">
+        <div>
+          <p class="project-section-title">Problem & Why it matters</p>
+          <p class="project-desc">Uncover purchasing patterns, reorder behavior, and retention signals across 3M+ grocery orders — translating complex behavioral data into actionable business insights for non-technical stakeholders.</p>
+          <div class="result-box">
+            <div class="result-metric">3M+ orders</div>
+            <div class="result-label">5 relational datasets · reorder rate, affinity clusters, peak windows</div>
+          </div>
+          <p class="project-section-title">Key Takeaways</p>
+          <p class="project-desc">Behavioral data is only as good as the cleaning pipeline upstream. Reorder rate variance across product categories revealed more about customer intent than simple frequency counts.</p>
+          <a href="https://github.com/coronavroxana" class="project-link" target="_blank">→ View on GitHub</a>
+        </div>
+        <div>
+          <p class="project-section-title">Methodology</p>
+          <ul class="step-list">
+            <li><span class="step-num">01</span> Cleaned and merged 5 relational datasets; handled missing values and data type inconsistencies</li>
+            <li><span class="step-num">02</span> Engineered reorder rate, purchase frequency, basket size, and recency features</li>
+            <li><span class="step-num">03</span> Identified peak shopping windows (day of week, hour of day) and seasonal patterns</li>
+            <li><span class="step-num">04</span> Segmented customers by reorder behavior and product affinity clusters</li>
+            <li><span class="step-num">05</span> Built executive-ready visualizations: heatmaps, distribution plots, ranked product tables</li>
+            <li><span class="step-num">06</span> Delivered actionable insights on high-churn segments and cross-sell opportunities</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="reveal">
+    <p class="section-label">Stack</p>
+    <h2 class="section-title">Technical Skills</h2>
+  </div>
+  <div class="skills-grid reveal">
+    <div class="skill-group">
+      <p class="skill-group-title">ML & Modeling</p>
+      <div class="skill-pills">
+        <span class="skill-pill">Scikit-learn</span>
+        <span class="skill-pill">XGBoost</span>
+        <span class="skill-pill">CatBoost</span>
+        <span class="skill-pill">LightGBM</span>
+        <span class="skill-pill">TensorFlow / Keras</span>
+        <span class="skill-pill">Class imbalance</span>
+        <span class="skill-pill">Cross-validation</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <p class="skill-group-title">Analysis</p>
+      <div class="skill-pills">
+        <span class="skill-pill">EDA</span>
+        <span class="skill-pill">Statistical Process Control</span>
+        <span class="skill-pill">Hypothesis Testing</span>
+        <span class="skill-pill">Time Series</span>
+        <span class="skill-pill">NLP</span>
+        <span class="skill-pill">Root Cause Analysis</span>
+        <span class="skill-pill">Feature Engineering</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <p class="skill-group-title">Languages & Tools</p>
+      <div class="skill-pills">
+        <span class="skill-pill">Python</span>
+        <span class="skill-pill">SQL / MySQL</span>
+        <span class="skill-pill">Power BI</span>
+        <span class="skill-pill">Advanced Excel</span>
+        <span class="skill-pill">Pandas / NumPy</span>
+        <span class="skill-pill">Matplotlib / Seaborn</span>
+        <span class="skill-pill">KPI Design</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="reveal">
+    <p class="section-label">Career</p>
+    <h2 class="section-title">Experience</h2>
+  </div>
+  <div class="timeline reveal">
+
+    <div class="tl-item" onclick="this.classList.toggle('open')">
+      <div class="tl-dot"></div>
+      <div class="tl-header">
+        <div class="tl-header-left">
+          <p class="tl-dates">2017 – 2022</p>
+          <p class="tl-role">Start-up Leader · Line Leader · Process Engineer · HS&E Scholar</p>
+          <p class="tl-company">Procter & Gamble — Milenio Plant</p>
+        </div>
+        <span class="tl-toggle">+</span>
+      </div>
+      <div class="tl-body">
+        <ul class="tl-bullets">
+          <li>Applied SPC in a GMP cosmetic manufacturing environment to reduce scrap and rework by 90% across 3 production lines.</li>
+          <li>Analyzed batch-level manufacturing data to detect deviation patterns and optimize quality release time by 20%.</li>
+          <li>Built productivity assessment models enabling operational restructuring and reduction of 2 FTEs.</li>
+          <li>Implemented automated defect-data validation systems, eliminating manual quality checks and achieving 0 critical audit findings.</li>
+          <li>Implemented GHS chemical handling legislation across plant operations, standardizing hazard communication and compliance documentation for regulatory audits. 0 findings in chemicals systems audits after implementation.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tl-item" onclick="this.classList.toggle('open')">
+      <div class="tl-dot"></div>
+      <div class="tl-header">
+        <div class="tl-header-left">
+          <p class="tl-dates">2022 – 2024</p>
+          <p class="tl-role">Innovation Sr. Manager</p>
+          <p class="tl-company">Grupo SICCSA</p>
+        </div>
+        <span class="tl-toggle">+</span>
+      </div>
+      <div class="tl-body">
+        <ul class="tl-bullets">
+          <li>Automated 80+ internal processes via structured data analysis, increasing operational productivity by 15%.</li>
+          <li>Standardized HR and quality datasets achieving 0 compliance incidents across audit cycles.</li>
+          <li>Reduced tax penalties by 50% through analytical documentation audits.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tl-item" onclick="this.classList.toggle('open')">
+      <div class="tl-dot"></div>
+      <div class="tl-header">
+        <div class="tl-header-left">
+          <p class="tl-dates">2024 – 2026</p>
+          <p class="tl-role">Sales Executive</p>
+          <p class="tl-company">Grupo Embahome</p>
+        </div>
+        <span class="tl-toggle">+</span>
+      </div>
+      <div class="tl-body">
+        <ul class="tl-bullets">
+          <li>Analyzed customer investment data to optimize lead conversion, generating +20M MXN in transactions.</li>
+          <li>Designed performance tracking KPIs to improve sales forecasting for 100+ investment clients.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="reveal">
+    <p class="section-label">Let's talk</p>
+    <h2 class="section-title">Open to Querétaro, CDMX and remote opportunities.</h2>
+    <p class="contact-sub">Health analytics · Clinical evidence · Behavioral research · Impact data</p>
+    <div class="contact-links">
+      <a href="mailto:coronav.roxana@gmail.com" class="contact-link">✉ coronav.roxana@gmail.com</a>
+      <a href="https://linkedin.com/in/coronavroxana" target="_blank" class="contact-link">💼 LinkedIn</a>
+      <a href="https://github.com/coronavroxana" target="_blank" class="contact-link">⌥ GitHub</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>Roxana G. Corona Velázquez · Data Scientist</span>
+  <span>Querétaro, México · CDMX · Remote-ready</span>
+</footer>
+
+<script>
+  function toggleProject(card) {
+    card.classList.toggle('open');
+  }
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
