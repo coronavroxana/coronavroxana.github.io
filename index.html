@@ -687,7 +687,52 @@
 
   <div class="projects-list">
 
-    <!-- PROJECT 1: Zyfra -->
+    <!-- PROJECT 1: Chronic Disease Risk -->
+<div class="project-card reveal" onclick="toggleProject(this)">
+  <div class="project-header">
+    <div>
+      <p class="project-number">04 · Health Analytics</p>
+      <h3 class="project-name">Chronic Disease Risk Prediction</h3>
+      <p class="project-subtitle">CDC NHANES + BRFSS · Diabetes & Obesity · Dual-dataset comparison</p>
+    </div>
+    <div style="display:flex; flex-direction:column; align-items:flex-end; gap:1rem;">
+      <div class="project-tags">
+        <span class="tag">CatBoost</span>
+        <span class="tag">Mann-Whitney</span>
+        <span class="tag">NHANES</span>
+        <span class="tag">BRFSS</span>
+        <span class="tag accent">Health Analytics</span>
+      </div>
+      <div class="toggle-btn"><span class="toggle-icon">+</span> <span>details</span></div>
+    </div>
+  </div>
+  <div class="project-body">
+    <div>
+      <p class="project-section-title">Problem & Why it matters</p>
+      <p class="project-desc">Can objective body measurements (waist, arm circumference, height) predict diabetes risk as accurately as a behavioral survey — without lab tests? This project compares two CDC datasets to answer that question, and introduces a novel anthropometric ratio (WAR) as a potential low-cost screening indicator.</p>
+      <div class="result-box">
+        <div class="result-metric">AUC-ROC 0.81</div>
+        <div class="result-label">CatBoost · NHANES anthropometrics · 2x precision vs behavioral model</div>
+      </div>
+      <p class="project-section-title">Key Takeaways</p>
+      <p class="project-desc">Anthropometric measurements match behavioral survey predictive power (0.81 vs 0.80 AUC-ROC) with nearly double the precision (0.57 vs 0.29). WHR and WHeightR outperform BMI as risk indicators. Regression analysis confirms body measurements stratify population risk but cannot replace lab HbA1c for individual diagnosis — validating clinical practice.</p>
+      <a href="https://github.com/coronavroxana/Clinical-Risk-Prediction-Type-2-Diabetes-Obesity" class="project-link" target="_blank">→ View on GitHub</a>
+    </div>
+    <div>
+      <p class="project-section-title">Methodology</p>
+      <ul class="step-list">
+        <li><span class="step-num">01</span> Loaded BRFSS (253,680 surveys) and NHANES 2021-2022 (6,715 participants with lab HbA1c); merged 4 clinical datasets via participant ID</li>
+        <li><span class="step-num">02</span> Engineered WAR (Waist-to-Arm Ratio), WHR, WHeightR; applied height-stratified median imputation for 912 missing values</li>
+        <li><span class="step-num">03</span> Mann-Whitney U hypothesis testing across 5 anthropometric ratios vs HbA1c — all significant (p < 1e-39)</li>
+        <li><span class="step-num">04</span> Trained CatBoost, Random Forest, Logistic Regression on both datasets with class imbalance handling</li>
+        <li><span class="step-num">05</span> Cross-dataset comparison on AUC-ROC and Precision; NHANES model achieves 2x precision with 38x fewer observations</li>
+        <li><span class="step-num">06</span> Regression analysis (Linear + RF) for HbA1c prediction; RMSE 0.94 confirms anthropometrics insufficient for individual diagnosis</li>
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    <!-- PROJECT 2: Zyfra -->
     <div class="project-card reveal" onclick="toggleProject(this)">
       <div class="project-header">
         <div>
@@ -732,7 +777,7 @@
       </div>
     </div>
 
-    <!-- PROJECT 2: Telecom Churn -->
+    <!-- PROJECT 3: Telecom Churn -->
     <div class="project-card reveal" onclick="toggleProject(this)">
       <div class="project-header">
         <div>
@@ -777,7 +822,7 @@
       </div>
     </div>
 
-    <!-- PROJECT 3: Instacart -->
+    <!-- PROJECT 4: Instacart -->
     <div class="project-card reveal" onclick="toggleProject(this)">
       <div class="project-header">
         <div>
